@@ -1,11 +1,6 @@
-﻿using Microsoft.ApplicationInsights;
+﻿//using Microsoft.ApplicationInsights;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SomeService.Controllers
 {
@@ -20,12 +15,12 @@ namespace SomeService.Controllers
 
         private static ActivitySource _activitySource = new ActivitySource("WeatherService", version: "ver1.0");
         private readonly ILogger<WeatherForecastController> _logger;
-        private readonly TelemetryClient _telemetryClient;
+        //private readonly TelemetryClient _telemetryClient;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger, TelemetryClient telemetryClient)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger)//, TelemetryClient telemetryClient)
         {
             _logger = logger;
-            _telemetryClient = telemetryClient;
+            //_telemetryClient = telemetryClient;
         }
 
         [HttpGet]
@@ -33,7 +28,7 @@ namespace SomeService.Controllers
         {
             using (var activity = _activitySource.StartActivity("GetForecast"))
             {
-                _telemetryClient.TrackEvent("MyEvent");
+                //_telemetryClient.TrackEvent("MyEvent");
                 activity.AddTag("weatherforecast", "value");
                 activity.AddEvent(new ActivityEvent("MyEventOtl"));
 

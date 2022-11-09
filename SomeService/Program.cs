@@ -20,7 +20,11 @@ services.AddOpenTelemetryTracing(telemetryBuilder =>
         .AddJaegerExporter()
         ;
 });
-services.AddApplicationInsightsTelemetry();
+
+//services.AddApplicationInsightsTelemetry(o =>
+//{
+//    o.ConnectionString = builder.Configuration["ApplicationInsights:ConnectionString"];
+//});
 
 var app = builder.Build();
 

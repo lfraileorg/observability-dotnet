@@ -26,12 +26,16 @@ namespace WebClient.Controllers
         {
             using (var activity = _diagnostics.OnHome("with extra data"))
             {
-                activity?.AddTag("tag1", "value");
+                activity?.AddTag("tag1", "value");  
                 activity?.AddEvent(new ActivityEvent("my event"));
                 activity?.AddBaggage("bag1", "value bag1");
 
                 var httpClient = _httpClientFactory.CreateClient();
-                var response = await httpClient.GetAsync("http://localhost:5050/WeatherForecast");
+                var response = await httpClient.GetFromJsonAsync<List<WeatherForecast>>("http://localhost:5050/WeatherForecast");
+                response.ForEach(forecast => {
+                    _otelMetrics.RecordTemperature(forecast.TemperatureC);
+                });
+
                 _otelMetrics.AddWeatherCall();
             }
 
