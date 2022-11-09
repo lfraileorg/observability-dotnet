@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ApplicationInsightsResourceId>/subscriptions/26da47a8-c28d-4564-ae8e-8ba88e995a0a/resourceGroups/DistributedTracingDemosRG/providers/microsoft.insights/components/distributedtracing</ApplicationInsightsResourceId>
+		<UserSecretsId>e15bab50-bf3d-438d-ad00-5f1b4a925251</UserSecretsId>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Azure.Monitor.OpenTelemetry.Exporter" Version="1.0.0-beta.5" />
+		<PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.22.0-beta1" />
+		<PackageReference Include="OpenTelemetry.Exporter.Jaeger" Version="1.4.0-beta.2" />
+		<PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.0.0-rc9.8" />
+		<PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.0.0-rc9.8" />
+		<PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="1.0.0-rc9.8" />
+	</ItemGroup>
+
+</Project>

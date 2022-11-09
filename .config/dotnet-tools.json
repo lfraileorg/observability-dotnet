@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "isRoot": true,
+  "tools": {
+    "dotnet-counters": {
+      "version": "5.0.248003",
+      "commands": [
+        "dotnet-counters"
+      ]
+    }
+  }
+}
