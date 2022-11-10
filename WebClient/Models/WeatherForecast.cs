@@ -1,6 +1,4 @@
-using System;
-
-namespace WebClient
+namespace WebClient.Models
 {
     public class WeatherForecast
     {
