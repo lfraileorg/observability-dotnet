@@ -14,13 +14,13 @@ namespace WebClient.Controllers
     {
         private WebClientDiagnostics _diagnostics;
         private IHttpClientFactory _httpClientFactory;
-        private readonly WebClientMetrics _otelMetrics;
+        private readonly WebClientMetrics _metrics;
 
-        public HomeController(WebClientDiagnostics diagnostics,IHttpClientFactory httpClientFactoryu, WebClientMetrics otelMetrics)
+        public HomeController(WebClientDiagnostics diagnostics,IHttpClientFactory httpClientFactoryu, WebClientMetrics metrics)
         {
             _diagnostics = diagnostics;
             _httpClientFactory = httpClientFactoryu;
-            _otelMetrics = otelMetrics;
+            _metrics = metrics;
         }
 
         public async Task<IActionResult> Index()
@@ -36,10 +36,10 @@ namespace WebClient.Controllers
                 var httpClient = _httpClientFactory.CreateClient();
                 var response = await httpClient.GetFromJsonAsync<List<WeatherForecast>>("http://localhost:5050/WeatherForecast");
                 response.ForEach(forecast => {
-                    _otelMetrics.RecordTemperature(forecast.TemperatureC);
+                    _metrics.RecordTemperature(forecast.TemperatureC);
                 });
 
-                _otelMetrics.AddWeatherCall();
+                _metrics.AddWeatherCall();
             }
 
             return View();
