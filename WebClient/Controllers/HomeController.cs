@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using OpenTelemetry.Trace;
 using System;
 using System.Diagnostics;
 using System.Net.Http;
@@ -26,6 +27,9 @@ namespace WebClient.Controllers
         {
             using (var activity = _diagnostics.OnHome("dotnetmalaga2022"))
             {
+                //activity?.SetStatus(ActivityStatusCode.Error);
+                //activity?.RecordException(new ArgumentNullException("test"));
+
                 activity?.AddTag("webclient.call", "dotnetmalaga2022");  
                 activity?.AddEvent(new ActivityEvent("webclient-call-event"));
 
