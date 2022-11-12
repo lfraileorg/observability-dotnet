@@ -16,10 +16,10 @@ namespace WebClient.Controllers
         private IHttpClientFactory _httpClientFactory;
         private readonly WebClientMetrics _metrics;
 
-        public HomeController(WebClientDiagnostics diagnostics,IHttpClientFactory httpClientFactoryu, WebClientMetrics metrics)
+        public HomeController(WebClientDiagnostics diagnostics,IHttpClientFactory httpClientFactory, WebClientMetrics metrics)
         {
             _diagnostics = diagnostics;
-            _httpClientFactory = httpClientFactoryu;
+            _httpClientFactory = httpClientFactory;
             _metrics = metrics;
         }
 

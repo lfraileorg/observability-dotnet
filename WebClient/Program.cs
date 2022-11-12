@@ -28,17 +28,17 @@ builder.Services.AddOpenTelemetryTracing(builderTelemetry =>
     builderTelemetry.SetResourceBuilder(ResourceBuilder.CreateDefault().AddService("WebClient", serviceVersion: "ver1.0"))
         .AddAspNetCoreInstrumentation(options =>
         {
-            //options.Filter = (httpContext) =>
-            //{
-            //    return httpContext.Request.Method == HttpMethods.Get && httpContext.Request.Path.Value == "/";
-            //};
+            options.Filter = (httpContext) =>
+            {
+                return httpContext.Request.Method == HttpMethods.Get && httpContext.Request.Path.Value == "/";
+            };
         })
         .AddHttpClientInstrumentation(options =>
         {
-            //options.FilterHttpRequestMessage = (httpContext) =>
-            //{
-            //    return httpContext.Method.Method == HttpMethods.Get;
-            //};
+            options.FilterHttpRequestMessage = (httpContext) =>
+            {
+                return httpContext.Method.Method == HttpMethods.Get;
+            };
         })
         .AddSource(WebClientDiagnostics.ActivitySourceName)
         .AddAzureMonitorTraceExporter(o =>
@@ -57,7 +57,7 @@ builder.Services.AddOpenTelemetryMetrics(options =>
     .AddAspNetCoreInstrumentation()
     .AddMeter(WebClientMetrics.WebClientMeterName)
     .AddView(
-        instrumentName: "temperatures.celsius.dotnet",
+        instrumentName: "temperaturescelsius",
         new ExplicitBucketHistogramConfiguration { Boundaries = new double[] { -10, 0, 10, 30, 50 } })
     .AddAzureMonitorMetricExporter(o =>
     {
