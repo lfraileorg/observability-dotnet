@@ -24,7 +24,7 @@ namespace WebClient.Controllers
 
         public async Task<IActionResult> Index()
         {
-            using (var activity = _diagnostics.OnHome("with extra data"))
+            using (var activity = _diagnostics.OnHome("dotnetmalaga2022"))
             {
                 activity?.AddTag("webclient.call", "dotnetmalaga2022");  
                 activity?.AddEvent(new ActivityEvent("webclient-call-event"));

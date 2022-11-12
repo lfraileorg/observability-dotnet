@@ -9,8 +9,9 @@ namespace WebClient.Diagnotics
 
     public partial class WebClientDiagnostics
     {
+        public const string ActivitySourceName = "HomeModule";
         private ILogger _logger;
-        private static ActivitySource activitySource = new ActivitySource("HomeModule", version: "ver1.0");
+        private static ActivitySource activitySource = new ActivitySource(ActivitySourceName, version: "ver1.0");
 
 
         [LoggerMessage(EventId = 1, Level = LogLevel.Information, Message = "This is the message with {data}")]

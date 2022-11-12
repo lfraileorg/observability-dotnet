@@ -25,7 +25,6 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddOpenTelemetryTracing(builderTelemetry =>
 {
-
     builderTelemetry.SetResourceBuilder(ResourceBuilder.CreateDefault().AddService("WebClient", serviceVersion: "ver1.0"))
         .AddAspNetCoreInstrumentation(options =>
         {
@@ -41,7 +40,7 @@ builder.Services.AddOpenTelemetryTracing(builderTelemetry =>
             //    return httpContext.Method.Method == HttpMethods.Get;
             //};
         })
-        .AddSource("HomeModule")
+        .AddSource(WebClientDiagnostics.ActivitySourceName)
         .AddAzureMonitorTraceExporter(o =>
         {
             o.ConnectionString = builder.Configuration["ApplicationInsights:ConnectionString"];
