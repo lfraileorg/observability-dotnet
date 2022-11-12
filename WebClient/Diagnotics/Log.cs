@@ -1,8 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
-using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Diagnostics.Tracing;
-using System.Threading;
 
 namespace WebClient.Diagnotics
 {
