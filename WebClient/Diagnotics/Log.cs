@@ -7,43 +7,29 @@ using System.Threading;
 namespace WebClient.Diagnotics
 {
 
-    public class WebClientDiagnostics
+    public partial class WebClientDiagnostics
     {
         private ILogger _logger;
-
         private static ActivitySource activitySource = new ActivitySource("HomeModule", version: "ver1.0");
 
 
+        [LoggerMessage(EventId = 1, Level = LogLevel.Information, Message = "This is the message with {data}")]
+        private partial void OnHomeMessage(string data);
 
         public WebClientDiagnostics(ILoggerFactory loggerFactory)
         {
             _ = loggerFactory ?? throw new ArgumentNullException(nameof(loggerFactory));
-
-            _logger = loggerFactory.CreateLogger("WebClient");
+            _logger = loggerFactory.CreateLogger("WebClientDiagnostics");
         }
 
         public Activity OnHome(string data)
         {
             WebClientCounterSets.Instance.IncrementHomeIndex();
-
-            Log.HomeMessage(_logger, data);
+            
+            this.OnHomeMessage(data);          
 
             return activitySource.StartActivity("HomeIndex");
         }
-    }
-    public static class Log
-    {
-        public static void HomeMessage(ILogger logger, string message)
-        {
-            _homeMessage(logger, message, null);
-        }
-
-        private static Action<ILogger, string, Exception> _homeMessage = LoggerMessage.Define<string>(
-                LogLevel.Warning,
-                HomeId,
-                "this is the warning message with data {data}");
-
-        private static EventId HomeId = new EventId(100, nameof(HomeId));
     }
 
     class WebClientCounterSets
@@ -54,7 +40,6 @@ namespace WebClient.Diagnotics
 
         private IncrementingPollingCounter _homePerSecondCounters;
         private long _homePerSecondValue;
-
 
         public WebClientCounterSets()
             :base("WebClientCounters", EventSourceSettings.EtwSelfDescribingEventFormat)

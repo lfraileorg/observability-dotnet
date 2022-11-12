@@ -25,9 +25,22 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddOpenTelemetryTracing(builderTelemetry =>
 {
+
     builderTelemetry.SetResourceBuilder(ResourceBuilder.CreateDefault().AddService("WebClient", serviceVersion: "ver1.0"))
-        .AddAspNetCoreInstrumentation()
-        .AddHttpClientInstrumentation()
+        .AddAspNetCoreInstrumentation(options =>
+        {
+            //options.Filter = (httpContext) =>
+            //{
+            //    return httpContext.Request.Method == HttpMethods.Get && httpContext.Request.Path.Value == "/";
+            //};
+        })
+        .AddHttpClientInstrumentation(options =>
+        {
+            //options.FilterHttpRequestMessage = (httpContext) =>
+            //{
+            //    return httpContext.Method.Method == HttpMethods.Get;
+            //};
+        })
         .AddSource("HomeModule")
         .AddAzureMonitorTraceExporter(o =>
         {
