@@ -17,8 +17,8 @@ namespace WebClient.Diagnotics
             var meter = new Meter(meterName);
             MetricName = meterName;
 
-            WeatherCallsCounter = meter.CreateCounter<int>("weather-calls", "WeatherCalls");   
-            TemperaturesHistogram = meter.CreateHistogram<double>("temperatures-celsius", "Temperatures Cº", "Temperatures distribution");
+            WeatherCallsCounter = meter.CreateCounter<int>("weathercalls", "WeatherCalls");   
+            TemperaturesHistogram = meter.CreateHistogram<double>("temperaturescelsius", "Temperatures Cº", "Temperatures distribution");
         }
                 
         public void AddWeatherCall() => WeatherCallsCounter.Add(1);

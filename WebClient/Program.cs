@@ -56,14 +56,13 @@ builder.Services.AddOpenTelemetryMetrics(options =>
     .AddHttpClientInstrumentation()
     .AddAspNetCoreInstrumentation()
     .AddMeter(WebClientMetrics.WebClientMeterName)
+    .AddView(
+        instrumentName: "temperatures.celsius.dotnet",
+        new ExplicitBucketHistogramConfiguration { Boundaries = new double[] { -10, 0, 10, 30, 50 } })
     .AddAzureMonitorMetricExporter(o =>
     {
         o.ConnectionString = builder.Configuration["ApplicationInsights:ConnectionString"];
-    })
-    .AddView(
-        instrumentName: "temperatures-celsius",
-        new ExplicitBucketHistogramConfiguration { Boundaries = new double[] { -10, 0, 10, 30, 50 } })
-
+    })    
     .AddPrometheusExporter();
 });
 builder.Services.AddSingleton<WebClientDiagnostics>();

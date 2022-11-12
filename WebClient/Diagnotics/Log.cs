@@ -14,7 +14,7 @@ namespace WebClient.Diagnotics
         private static ActivitySource activitySource = new ActivitySource(ActivitySourceName, version: "ver1.0");
 
 
-        [LoggerMessage(EventId = 1, Level = LogLevel.Information, Message = "This is the message with {data}")]
+        [LoggerMessage(EventId = 1, Level = LogLevel.Warning, Message = "This is the message with {data}")]
         private partial void OnHomeMessage(string data);
 
         public WebClientDiagnostics(ILoggerFactory loggerFactory)
