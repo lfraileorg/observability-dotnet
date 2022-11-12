@@ -26,9 +26,8 @@ namespace WebClient.Controllers
         {
             using (var activity = _diagnostics.OnHome("with extra data"))
             {
-                activity?.AddTag("tag1", "value");  
-                activity?.AddEvent(new ActivityEvent("my event"));
-                activity?.AddBaggage("bag1", "value bag1");
+                activity?.AddTag("webclient.call", "dotnetmalaga2022");  
+                activity?.AddEvent(new ActivityEvent("webclient-call-event"));
 
                 var httpClient = _httpClientFactory.CreateClient();
                 var response = await httpClient.GetFromJsonAsync<List<WeatherForecast>>("http://localhost:5050/WeatherForecast");
